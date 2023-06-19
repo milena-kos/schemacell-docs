@@ -17,3 +17,5 @@ So, with the idea of Schemacell abandoned, people moved on.
 Later on, I came up with that idea too and wanted to make it a reality. I first tried JSON - which didn't suceed due to lack of actual programming functionality. Then I tested C# to allow for direct copy of existing CMMM cells, which also didn't work out because C# is a compiled language, so I would have to get people to build their mods to DLL, which was the approach [Cell Machine Indev](https://themysticlynx.itch.io/indev) took. In the end, I settled on Lua - it is interpreted, simple to implement in Unity, has a good syntax and is known by many people (bc cellua hahah). And thats what Schemacell is running on right now.
 
 Now after you are educated, lets make some cells shall we?
+
+[Next - What are mods](1.%20What%20are%20mods.md)
