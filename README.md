@@ -10,7 +10,7 @@ If you are here only to play mods made by others, then go to the [Discord server
 
 ## History
 
-How some of you might know, quite a long time ago eclipse_m came up with the idea of Schemacell - a mod where you would be able to create your own cells using simple JSON. We got a bunch of promises, a name change to Schematell, and somehow it all ended up as a 2D platformer.
+How some of you might know, quite a long time ago eclipse_e came up with the idea of Schemacell - a mod where you would be able to create your own cells using simple JSON. We got a bunch of promises, a name change to Schematell, and somehow it all ended up as a 2D platformer.
 
 So, with the idea of Schemacell abandoned, people moved on.
 
