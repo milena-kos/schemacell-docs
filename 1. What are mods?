@@ -1,0 +1,75 @@
+## What are mods?
+
+Mods for Schemacell are written in Lua, so they are a `.lua` file. You don't have to have lua installed.
+
+To install a Schemacell mod, just put your `.lua` file into `_Data/cells` folder, similar to texturepacks.
+
+Along it you will need to put the cell texture.
+
+## Mod Structure
+
+Lets look at this example for a fast mover cell:
+```lua
+name = "Fast Mover"
+id = "FASTMOVER"
+author = "Milenakos"
+texture = "fastmover.png"
+updateAfter = "MOVER"
+-- updateAfter = "CWROTATER" etc
+-- if more than one mod wants the spot, sort reverse-alphabetically
+-- if not set, updates last
+
+function Step ()
+    this.Push(this.rotation, 1)
+    this.Push(this.rotation, 1)
+    this.suppressed = false
+end
+
+-- this code is taken from mover cell without changes.
+function Push (dir, bias)
+    if (this.suppressed) then
+        return this.Push(dir, bias)
+    end
+
+    if (this.rotation == dir) then
+        bias = bias + 1
+    elseif ((dir + 2) % 4 == this.rotation) then
+        bias = bias - 1
+    end
+    return this.Push(dir, bias)
+end
+```
+
+There are 2 sections - the mod metadata and the functions. Lets get into them in detail.
+
+### Metadata section
+
+Metadata section is a section with some of the information about your mod, typically at the top of the file.
+
+This includes cell name, ID, author, texture and update order.
+
+In Schemacell, all cells are technically tracked, so keep that in mind or something.
+
+### Function section
+
+This is the main juice of the mod.
+
+You can create multiple functions which will run at different times of the game, including:
+
+- Push (int dir, int bias) - called whenever cell is pushed. Should return `bool PushSuccess, bool DeletePusher`. First one says wether pusher should move, second whether it should be deleted. This can also be returned by calling another `Push` if want to mimic behaviour of other cell.
+
+- Setup (int x, int y, int dir, bool gen) - called whenever cell is created (either placed by user or generated if gen is true, not to be confused with simulation start). If used should call `this.Push(x, y, dir, gen)` at the end to continue basic setup process.
+
+- Delete (bool destroy) - called whenever cell is requested to be deleted. If destroy is false cell is removed by user (so permanently), otherwise it got removed by other cell while in simulation.
+
+- Rotate (int amount) - called whenever cell is requested to be rotated.
+
+- Step () - called every tick
+
+Now thats great and all, but how do we access information about the grid or actually do something?
+
+Well, the actual cell is represented by using `this` keyword, which returns a cell object.
+
+You can also use `Cell(int x, int y)` to get the cell by coordinates, which also returns a cell object.
+
+Cell object structure is explained in the next file.
